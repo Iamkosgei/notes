@@ -35,7 +35,7 @@ public class NotesService {
     }
 
     //delete note
-    public void deleteNote(String id)
+    void deleteNote(String id)
     {
         notesRepository.deleteById(Integer.parseInt(id));
     }
