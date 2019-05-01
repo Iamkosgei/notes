@@ -11,6 +11,12 @@ public class NotesController {
     @Autowired
     private NotesService notesService;
 
+    @RequestMapping("/")
+    public String home()
+    {
+        return "<h1> Welcome to notes </h1> <a href='/notes'> Notes </a>";
+    }
+
     @RequestMapping("/notes")
     public List<Note> allNotes()
     {
