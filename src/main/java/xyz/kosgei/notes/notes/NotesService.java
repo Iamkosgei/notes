@@ -14,6 +14,7 @@ public class NotesService {
     @Autowired
     private NotesRepository notesRepository;
 
+    //all notes
     List<Note> allNotes()
     {
         List<Note> notes = new ArrayList<>();
@@ -21,9 +22,32 @@ public class NotesService {
         return notes;
     }
 
+    // saving a new note
     void addNote(Note note)
     {
         notesRepository.save(note);
     }
 
+    //getting a single note
+    Note findNote(String id)
+    {
+        return notesRepository.findById(Integer.parseInt(id)).orElse(null);
+    }
+
+    //delete note
+    public void deleteNote(String id)
+    {
+        notesRepository.deleteById(Integer.parseInt(id));
+    }
+
+    //update a note
+    void updateNote(Note note,String id)
+    {
+      Note updatedNote = notesRepository.findById(Integer.parseInt(id)).get();
+
+      updatedNote.setTitle(note.getTitle());
+      updatedNote.setMessage(note.getMessage());
+
+      notesRepository.save(updatedNote);
+    }
 }

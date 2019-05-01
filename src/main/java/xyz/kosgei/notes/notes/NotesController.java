@@ -1,10 +1,7 @@
 package xyz.kosgei.notes.notes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +17,21 @@ public class NotesController {
         return notesService.allNotes();
     }
 
+    @RequestMapping("/notes/{id}")
+    public Note oneNote(@PathVariable String id)
+    {
+        return notesService.findNote(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST,value = "/notes")
     public void addNewNote(@RequestBody Note note)
     {
         notesService.addNote(note);
+    }
+
+    @PutMapping("/notes/{id}")
+    public void updateNote(@RequestBody Note note ,@PathVariable String id )
+    {
+        notesService.updateNote(note,id);
     }
 }
